@@ -1,0 +1,19 @@
+{
+    "name": "louislam\louislam-utilities",
+    "description": "Useful php functions collected by Louis.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Louis Lam",
+            "email": "louis@louislam.net"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "LouisLam\\" : "src/LouisLam"
+        }
+    }
+}
