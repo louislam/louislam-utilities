@@ -15,9 +15,19 @@ class Util
         return str_replace("_", " ", ucfirst($str));
     }
 
-    public static  function url($relativePath) 
+    public static  function url($relativePath)
     {
-        return str_replace("index.php", "", $_SERVER["SCRIPT_NAME"]) . $relativePath;
+        $containIndex = String::contains($_SERVER["REQUEST_URI"], $_SERVER["SCRIPT_NAME"]);
+
+        if ($containIndex) {
+            return $_SERVER["SCRIPT_NAME"] . "/" . $relativePath;
+        } else {
+            return str_replace("index.php", "", $_SERVER["SCRIPT_NAME"]) . $relativePath;
+        }
+    }
+
+    public static function res($relativePath) {
+            return str_replace("index.php", "", $_SERVER["SCRIPT_NAME"]) . $relativePath;
     }
     
     public static function loadJSON($path)
