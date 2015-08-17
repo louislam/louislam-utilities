@@ -22,12 +22,17 @@ class Util
         if ($containIndex) {
             return $_SERVER["SCRIPT_NAME"] . "/" . $relativePath;
         } else {
-            return str_replace("index.php", "", $_SERVER["SCRIPT_NAME"]) . $relativePath;
+            $segments = explode("/", $_SERVER["SCRIPT_NAME"]);
+
+            $phpFile = $segments[count($segments) - 1];
+            return str_replace($phpFile, "", $_SERVER["SCRIPT_NAME"]) . $relativePath;
         }
     }
 
     public static function res($relativePath) {
-            return str_replace("index.php", "", $_SERVER["SCRIPT_NAME"]) . $relativePath;
+        $segments = explode("/", $_SERVER["SCRIPT_NAME"]);
+        $phpFile = $segments[count($segments) - 1];
+        return str_replace($phpFile, "", $_SERVER["SCRIPT_NAME"]) . $relativePath;
     }
     
     public static function loadJSON($path)
