@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<phpunit bootstrap="./bootstrap.php" colors="true">
+<phpunit bootstrap="./Tests/bootstrap.php" colors="true">
 
     <php>
         <var name="db_dsn" value="mysql:dbname=hello_world_test;host=localhost"/>
@@ -10,7 +10,7 @@
 
     <testsuites>
         <testsuite name="Test Suite">
-            <directory>./</directory>
+            <directory>./Tests</directory>
         </testsuite>
     </testsuites>
 
