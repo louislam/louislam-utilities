@@ -36,7 +36,6 @@ matrix:
 
 # execute any number of scripts before the test run, custom env's are available as variables
 before_script:
-  - composer install
   - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS hello_world_test;" -uroot; fi
 
 # omitting "script:" will default to phpunit
