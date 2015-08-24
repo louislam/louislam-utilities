@@ -16,5 +16,14 @@ $(document).ready(function () {
             location.href = $(this).attr("href");
         }
     });
+    // Ajax Link
+    $(".ajax-link").click(function (e) {
+        var a = $(this);
+        e.preventDefault();
+        $.get($(this).attr("href"), function (data) {
+            var callback = a.data("ajax-callback");
+            callback(data, a);
+        });
+    });
 });
 //# sourceMappingURL=L.js.map

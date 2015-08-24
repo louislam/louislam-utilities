@@ -18,6 +18,17 @@ $(document).ready(function () {
         if (yes) {
             location.href = $(this).attr("href");
         }
+    });
+
+    // Ajax Link
+    $(".ajax-link").click(function (e) {
+        var a = $(this)
+        e.preventDefault();
+
+        $.get($(this).attr("href"), function (data) {
+            var callback = a.data("ajax-callback");
+            callback(data, a);
+        })
     })
 
 });
