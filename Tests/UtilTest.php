@@ -10,9 +10,9 @@ class UtilTest extends PHPUnit_Framework_TestCase
 
     }
 
-    public function testUrl()
+    public function testDisplayName()
     {
-        $this->assertEquals("/", Util::url("/"));
+        $this->assertEquals("User id", Util::displayName("user_id"));
     }
 }
 
