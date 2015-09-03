@@ -25,5 +25,23 @@ $(document).ready(function () {
             callback(data, a);
         });
     });
+    $(".ajax-link-confirm").click(function (e) {
+        e.preventDefault();
+        var yes;
+        if ($(this).hasClass("force-confirm")) {
+            yes = true;
+        }
+        else {
+            yes = confirm("Are you sure?");
+        }
+        if (yes) {
+            var a = $(this);
+            e.preventDefault();
+            $.get($(this).attr("href"), function (data) {
+                var callback = a.data("ajax-callback");
+                callback(data, a);
+            });
+        }
+    });
 });
 //# sourceMappingURL=L.js.map
