@@ -43,5 +43,23 @@ $(document).ready(function () {
             });
         }
     });
+    $(".ajax-link-prompt").click(function (e) {
+        e.preventDefault();
+        var yes;
+        if ($(this).hasClass("force-confirm")) {
+            yes = $(this).data("msg-input");
+        }
+        else {
+            yes = prompt($(this).data("msg"));
+        }
+        if (yes != null) {
+            var a = $(this);
+            e.preventDefault();
+            $.get($(this).attr("href"), { "msg": yes }, function (data) {
+                var callback = a.data("ajax-callback");
+                callback(data, a);
+            });
+        }
+    });
 });
 //# sourceMappingURL=L.js.map
