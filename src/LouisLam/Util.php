@@ -30,6 +30,21 @@ class Util
         }
     }
 
+    /**
+     * Protocol "function" from http://stackoverflow.com/questions/4503135/php-get-site-url-protocol-http-vs-https
+     * @param $relativePath
+     * @return string
+     */
+    public static function fullURL($relativePath) {
+        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+        return $protocol . $_SERVER["SERVER_NAME"] . Util::url($relativePath);
+    }
+
+    /**
+     * Relative Path for resources (jpg, png etc)
+     * @param $relativePath
+     * @return string
+     */
     public static function res($relativePath)
     {
         $segments = explode("/", $_SERVER["SCRIPT_NAME"]);
