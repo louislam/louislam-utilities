@@ -10,7 +10,7 @@ class StringTest extends PHPUnit_Framework_TestCase
 
     public function testContains()
     {
-        $this->assertEquals(true, \LouisLam\String::contains("Hello World", "Hello"));
+        $this->assertEquals(true, \LouisLam\LouisString::contains("Hello World", "Hello"));
     }
 }
 
