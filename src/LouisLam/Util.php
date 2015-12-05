@@ -17,7 +17,7 @@ class Util
 
     public static function url($relativePath)
     {
-        $containIndex = String::contains($_SERVER["REQUEST_URI"], $_SERVER["SCRIPT_NAME"]);
+        $containIndex = LouisString::contains($_SERVER["REQUEST_URI"], $_SERVER["SCRIPT_NAME"]);
 
         if ($containIndex) {
             return $_SERVER["SCRIPT_NAME"] . "/" . $relativePath;
