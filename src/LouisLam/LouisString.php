@@ -9,7 +9,7 @@
 namespace LouisLam;
 
 
-class String
+class LouisString
 {
 
     /**
