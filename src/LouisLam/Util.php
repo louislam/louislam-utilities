@@ -15,6 +15,10 @@ class Util
         return str_replace("_", " ", ucfirst($str));
     }
 
+    public static function urlEncodeWithoutSlash($path) {
+        return implode('/', array_map('rawurlencode', explode('/', $path)));
+    }
+
     public static function url($relativePath)
     {
         $containIndex = LouisString::contains($_SERVER["REQUEST_URI"], $_SERVER["SCRIPT_NAME"]);
@@ -26,7 +30,7 @@ class Util
 
             $phpFile = $segments[count($segments) - 1];
 
-            return urlencode(str_replace($phpFile, "", $_SERVER["SCRIPT_NAME"]) . $relativePath);
+            return Util::urlEncodeWithoutSlash(str_replace($phpFile, "", $_SERVER["SCRIPT_NAME"]) . $relativePath);
         }
     }
 
@@ -37,7 +41,7 @@ class Util
      */
     public static function fullURL($relativePath) {
         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-        return urlencode($protocol . $_SERVER["SERVER_NAME"] . Util::url($relativePath));
+        return Util::urlEncodeWithoutSlash($protocol . $_SERVER["SERVER_NAME"] . Util::url($relativePath));
     }
 
     /**
@@ -50,7 +54,7 @@ class Util
         $segments = explode("/", $_SERVER["SCRIPT_NAME"]);
         $phpFile = $segments[count($segments) - 1];
 
-        return urlencode(str_replace($phpFile, "", $_SERVER["SCRIPT_NAME"]) . $relativePath);
+        return Util::urlEncodeWithoutSlash(str_replace($phpFile, "", $_SERVER["SCRIPT_NAME"]) . $relativePath);
     }
     
     public static function loadJSON($path)
