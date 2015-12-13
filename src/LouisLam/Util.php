@@ -20,13 +20,13 @@ class Util
         $containIndex = LouisString::contains($_SERVER["REQUEST_URI"], $_SERVER["SCRIPT_NAME"]);
 
         if ($containIndex) {
-            return $_SERVER["SCRIPT_NAME"] . "/" . $relativePath;
+            return urlencode($_SERVER["SCRIPT_NAME"] . "/" . $relativePath);
         } else {
             $segments = explode("/", $_SERVER["SCRIPT_NAME"]);
 
             $phpFile = $segments[count($segments) - 1];
 
-            return str_replace($phpFile, "", $_SERVER["SCRIPT_NAME"]) . $relativePath;
+            return urlencode(str_replace($phpFile, "", $_SERVER["SCRIPT_NAME"]) . $relativePath);
         }
     }
 
