@@ -15,8 +15,14 @@ class Util
         return str_replace("_", " ", ucfirst($str));
     }
 
+
+
     public static function url($relativePath)
     {
+
+        // Remove the first slash
+        $relativePath = ltrim($relativePath, '/');
+
         $containIndex = LouisString::contains($_SERVER["REQUEST_URI"], $_SERVER["SCRIPT_NAME"]);
 
         if ($containIndex) {
@@ -36,6 +42,10 @@ class Util
      * @return string
      */
     public static function fullURL($relativePath) {
+
+        // Remove the first slash
+        $relativePath = ltrim($relativePath, '/');
+
         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
         return $protocol . $_SERVER["SERVER_NAME"] . Util::url($relativePath);
     }

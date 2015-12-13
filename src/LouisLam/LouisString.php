@@ -22,4 +22,8 @@ class LouisString
         return (strpos($str, $match) !== false);
     }
 
+    public static function charAt($str, $index) {
+        return mb_substr($str, $index, 1, 'utf-8');
+    }
+
 }
