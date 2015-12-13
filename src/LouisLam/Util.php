@@ -37,7 +37,7 @@ class Util
      */
     public static function fullURL($relativePath) {
         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-        return $protocol . $_SERVER["SERVER_NAME"] . Util::url($relativePath);
+        return urlencode($protocol . $_SERVER["SERVER_NAME"] . Util::url($relativePath));
     }
 
     /**
@@ -50,7 +50,7 @@ class Util
         $segments = explode("/", $_SERVER["SCRIPT_NAME"]);
         $phpFile = $segments[count($segments) - 1];
 
-        return str_replace($phpFile, "", $_SERVER["SCRIPT_NAME"]) . $relativePath;
+        return urlencode(str_replace($phpFile, "", $_SERVER["SCRIPT_NAME"]) . $relativePath);
     }
     
     public static function loadJSON($path)
