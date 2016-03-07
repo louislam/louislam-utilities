@@ -63,6 +63,17 @@ class Util
         return str_replace($phpFile, "", $_SERVER["SCRIPT_NAME"]) . $relativePath;
     }
     
+    
+    public static function fullRes($relativePath) {
+
+        // Remove the first slash
+        $relativePath = ltrim($relativePath, '/');
+
+        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+        return $protocol . $_SERVER["SERVER_NAME"] . Util::res($relativePath);
+    }
+    
+    
     public static function loadJSON($path)
     {
         $json = file_get_contents($path);
