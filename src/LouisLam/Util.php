@@ -46,7 +46,13 @@ class Util
         // Remove the first slash
         $relativePath = ltrim($relativePath, '/');
 
-        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+        if(!empty($_SERVER['HTTP_X_FORWARDED_PROTO'])){
+            $protocol = $_SERVER['HTTP_X_FORWARDED_PROTO'].'://';
+        }
+        else{
+            $protocol = !empty($_SERVER['HTTPS']) ? "https://" : "http://";
+        }
+
         return $protocol . $_SERVER["SERVER_NAME"] . Util::url($relativePath);
     }
 
@@ -69,7 +75,13 @@ class Util
         // Remove the first slash
         $relativePath = ltrim($relativePath, '/');
 
-        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+        if(!empty($_SERVER['HTTP_X_FORWARDED_PROTO'])){
+            $protocol = $_SERVER['HTTP_X_FORWARDED_PROTO'].'://';
+        }
+        else{
+            $protocol = !empty($_SERVER['HTTPS']) ? "https://" : "http://";
+        }
+        
         return $protocol . $_SERVER["SERVER_NAME"] . Util::res($relativePath);
     }
     
