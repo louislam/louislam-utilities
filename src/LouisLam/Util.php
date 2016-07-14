@@ -50,7 +50,17 @@ class Util
             $protocol = $_SERVER['HTTP_X_FORWARDED_PROTO'].'://';
         }
         else{
-            $protocol = !empty($_SERVER['HTTPS']) ? "https://" : "http://";
+           if (isset($_SERVER["HTTP"])) {
+                
+                if ($_SERVER["HTTP"] == "off") {
+                    $protocol = "http://";
+                } else {
+                    $protocol = "https://";
+                }
+                
+            } else {
+                $protocol = "http://";
+            }
         }
 
         return $protocol . $_SERVER["SERVER_NAME"] . Util::url($relativePath);
@@ -79,7 +89,17 @@ class Util
             $protocol = $_SERVER['HTTP_X_FORWARDED_PROTO'].'://';
         }
         else{
-            $protocol = !empty($_SERVER['HTTPS']) ? "https://" : "http://";
+            if (isset($_SERVER["HTTP"])) {
+                
+                if ($_SERVER["HTTP"] == "off") {
+                    $protocol = "http://";
+                } else {
+                    $protocol = "https://";
+                }
+                
+            } else {
+                $protocol = "http://";
+            }
         }
         
         return $protocol . $_SERVER["SERVER_NAME"] . Util::res($relativePath);
