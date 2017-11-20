@@ -50,12 +50,12 @@ class Util
             $protocol = $_SERVER['HTTP_X_FORWARDED_PROTO'].'://';
         }
         else{
-           if (isset($_SERVER["HTTP"])) {
+           if (isset($_SERVER["HTTPS"])) {
                 
-                if ($_SERVER["HTTP"] == "off") {
-                    $protocol = "http://";
-                } else {
+                if ($_SERVER["HTTPS"] == "on") {
                     $protocol = "https://";
+                } else {
+                    $protocol = "http://";
                 }
                 
             } else {
@@ -89,12 +89,12 @@ class Util
             $protocol = $_SERVER['HTTP_X_FORWARDED_PROTO'].'://';
         }
         else{
-            if (isset($_SERVER["HTTP"])) {
+            if (isset($_SERVER["HTTPS"])) {
                 
-                if ($_SERVER["HTTP"] == "off") {
-                    $protocol = "http://";
-                } else {
+                if ($_SERVER["HTTPS"] == "on") {
                     $protocol = "https://";
+                } else {
+                    $protocol = "http://";
                 }
                 
             } else {
