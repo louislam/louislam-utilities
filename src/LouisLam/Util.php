@@ -46,21 +46,10 @@ class Util
         // Remove the first slash
         $relativePath = ltrim($relativePath, '/');
 
-        if(!empty($_SERVER['HTTP_X_FORWARDED_PROTO'])){
-            $protocol = $_SERVER['HTTP_X_FORWARDED_PROTO'].'://';
-        }
-        else{
-           if (isset($_SERVER["HTTPS"])) {
-                
-                if ($_SERVER["HTTPS"] == "on") {
-                    $protocol = "https://";
-                } else {
-                    $protocol = "http://";
-                }
-                
-            } else {
-                $protocol = "http://";
-            }
+        if (self::isSSL()) {
+            $protocol = "https://";
+        } else {
+            $protocol = "http://";
         }
 
         return $protocol . $_SERVER["SERVER_NAME"] . Util::url($relativePath);
@@ -85,21 +74,10 @@ class Util
         // Remove the first slash
         $relativePath = ltrim($relativePath, '/');
 
-        if(!empty($_SERVER['HTTP_X_FORWARDED_PROTO'])){
-            $protocol = $_SERVER['HTTP_X_FORWARDED_PROTO'].'://';
-        }
-        else{
-            if (isset($_SERVER["HTTPS"])) {
-                
-                if ($_SERVER["HTTPS"] == "on") {
-                    $protocol = "https://";
-                } else {
-                    $protocol = "http://";
-                }
-                
-            } else {
-                $protocol = "http://";
-            }
+        if (self::isSSL()) {
+            $protocol = "https://";
+        } else {
+            $protocol = "http://";
         }
         
         return $protocol . $_SERVER["SERVER_NAME"] . Util::res($relativePath);
@@ -184,5 +162,14 @@ class Util
         }
 
         return $result;
+    }
+
+    public static function isSSL() {
+        if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on") {
+            return true;
+        } else if (isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) && $_SERVER["HTTP_X_FORWARDED_PROTO"] == "https") {
+            return true;
+        }
+        return false;
     }
 }
